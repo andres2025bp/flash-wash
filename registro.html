@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Servicios de Lavado</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- CSS separado -->
+  <link rel="stylesheet" href="registro.css">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-blue-700 mb-8">Registro de Servicios de Lavado</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+      <p class="text-gray-700">
+        Bienvenido al sistema de registro de servicios de lavado. Aquí podrás registrar nuevos servicios, visualizar estadísticas y gestionar los registros existentes.
+      </p>
+    </div>
+
+    <a href="Login.html">
+      <button class="btn-logout" onclick="alert('¡Deseas cerrar sesión!')">Cerrar sesión</button>
+    </a>
+
+    <div class="mt-6 mb-8">
+      <p class="text-gray-600">Para registrar un nuevo servicio, completa el formulario a continuación.</p>
+
+      <div class="flex flex-container gap-8">
+        <!-- Formulario -->
+        <div class="form-section w-1/2">
+          <div class="form-card bg-white p-8 rounded-lg">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Nuevo Servicio</h2>
+            <form id="registroForm" class="space-y-4">
+              <div>
+                <label for="lavador" class="block text-sm font-medium">Nombre del Lavador</label>
+                <input type="text" id="lavador" name="lavador" required class="input" placeholder="Ej: Carlos González">
+              </div>
+              <div>
+                <label for="codigo" class="block text-sm font-medium">Código iBanner</label>
+                <input type="text" id="codigo" name="codigo" required class="input" placeholder="Ej: IB12345">
+              </div>
+              <div>
+                <label for="precio" class="block text-sm font-medium">Precio ($)</label>
+                <input type="number" id="precio" name="precio" required min="1" class="input" placeholder="Ej: 25000">
+              </div>
+              <div>
+                <label for="cancelado" class="block text-sm font-medium">Valor Cancelado ($)</label>
+                <input type="number" id="cancelado" name="cancelado" required min="0" class="input" placeholder="Ej: 20000">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="fecha" class="block text-sm font-medium">Fecha</label>
+                  <input type="date" id="fecha" name="fecha" required class="input">
+                </div>
+                <div>
+                  <label for="hora" class="block text-sm font-medium">Hora</label>
+                  <input type="time" id="hora" name="hora" required class="input">
+                </div>
+              </div>
+              <button type="submit" class="btn-primary">Registrar Servicio</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Gráfico -->
+        <div class="chart-section w-1/2">
+          <div class="chart-card bg-white p-8 rounded-lg shadow-lg h-full">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Estadísticas</h2>
+            <label for="tipoGrafico" class="block text-sm font-medium">Tipo de Estadística</label>
+            <select id="tipoGrafico" class="input">
+              <option value="lavadores">Servicios por Lavador</option>
+              <option value="precios">Distribución de Precios</option>
+              <option value="cancelado_vs_precio">Cancelado vs Precio</option>
+              <option value="horas">Servicios por Hora</option>
+            </select>
+            <div class="chart-container">
+              <canvas id="estadisticasChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registros -->
+      <div class="mt-8 bg-white p-6 rounded-lg shadow">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-semibold">Registros</h2>
+          <button id="limpiarRegistros" class="btn-danger">Limpiar Todos</button>
+        </div>
+        <div id="ultimosRegistros" class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th>Lavador</th><th>Código</th><th>Precio</th><th>Cancelado</th><th>Fecha/Hora</th><th>Diferencia</th><th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="registrosBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script separado -->
+  <script src="registro.js"></script>
+</body>
+</html>
