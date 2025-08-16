@@ -5,6 +5,22 @@
   --primary-hover: #4291be;
   --tap-highlight: rgb(54, 148, 171);
 }
+/* Para móviles (pantallas menores a 768px) */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .contenedor {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  button {
+    width: 100%; /* botones a lo ancho */
+  }
+}
 
 body {
   font-family: 'Inter', sans-serif;
@@ -61,6 +77,7 @@ body {
     padding: 1rem;
   }
 }   
+
 
 
 
